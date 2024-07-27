@@ -1,6 +1,7 @@
 <h1>
     DOM manipulation, Web storage and working with JSON data
 </h1>
+<img src="/assets/a37e5ed7904114824d903267522a23a820fe74fb.jpg">
 <p>
     Welcome to the “DOM Manipulation, Web Storage, and Working with JSON Data” project! In this project, you will develop a dynamic web application that generates, manages, and filters content based on user interactions. This project focuses on advanced DOM manipulation techniques, web storage, and handling JSON data.
 
