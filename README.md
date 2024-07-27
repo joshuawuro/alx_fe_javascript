@@ -5,7 +5,6 @@
     Welcome to the “DOM Manipulation, Web Storage, and Working with JSON Data” project! In this project, you will develop a dynamic web application that generates, manages, and filters content based on user interactions. This project focuses on advanced DOM manipulation techniques, web storage, and handling JSON data.
 
 You will learn how to:
-
     <ul>
         <li>
             Create and manipulate dynamic content using JavaScript.
@@ -23,14 +22,12 @@ You will learn how to:
             Sync local data with a server and handle potential conflicts.
         </li>
     </ul>
-    
-By the end of this project, you will have a robust understanding of advanced JavaScript concepts and be able to create dynamic, interactive, and persistent web applications.
 
+By the end of this project, you will have a robust understanding of advanced JavaScript concepts and be able to create dynamic, interactive, and persistent web applications.
     <h2>
         Learning Objectives
     </h2>
 By the end of this project, students should be able to:
-
     <ol>
         <li>
             <h4>
