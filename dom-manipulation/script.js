@@ -118,17 +118,18 @@ function importFromJsonFile(event) {
     fileReader.readAsText(event.target.files[0]);
 }
 
-function fetchQuotesFromServer() {
-    fetch(API_URL)
-        .then(response => response.json())
-        .then(serverQuotes => {
-            resolveConflicts(serverQuotes);
-            saveQuotesToLocalStorage();
-            updateCategoryFilter();
-            filterQuotes();
-            showNotification('Quotes updated from server.');
-        })
-        .catch(error => console.error('Error fetching quotes:', error));
+async function fetchQuotesFromServer() {
+    try {
+        const response = await fetch(API_URL);
+        const serverQuotes = await response.json();
+        resolveConflicts(serverQuotes);
+        saveQuotesToLocalStorage();
+        updateCategoryFilter();
+        filterQuotes();
+        showNotification('Quotes updated from server.');
+    } catch (error) {
+        console.error('Error fetching quotes:', error);
+    }
 }
 
 function resolveConflicts(serverQuotes) {
