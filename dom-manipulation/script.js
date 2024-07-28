@@ -1,3 +1,5 @@
+const API_URL = 'https://jsonplaceholder.typicode.com/posts';
+
 // Load quotes from local storage if available
 const savedQuotes = localStorage.getItem('quotes');
 const quotes = savedQuotes ? JSON.parse(savedQuotes) : [
@@ -116,6 +118,40 @@ function importFromJsonFile(event) {
     fileReader.readAsText(event.target.files[0]);
 }
 
+function fetchQuotesFromServer() {
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(serverQuotes => {
+            resolveConflicts(serverQuotes);
+            saveQuotesToLocalStorage();
+            updateCategoryFilter();
+            filterQuotes();
+            showNotification('Quotes updated from server.');
+        })
+        .catch(error => console.error('Error fetching quotes:', error));
+}
+
+function resolveConflicts(serverQuotes) {
+    const localQuoteTexts = quotes.map(quote => quote.text);
+    serverQuotes.forEach(serverQuote => {
+        if (!localQuoteTexts.includes(serverQuote.text)) {
+            quotes.push(serverQuote);
+        }
+    });
+}
+
+function showNotification(message) {
+    const notificationsDiv = document.getElementById('notifications');
+    const notification = document.createElement('div');
+    notification.innerText = message;
+    notificationsDiv.appendChild(notification);
+    setTimeout(() => notificationsDiv.removeChild(notification), 5000);
+}
+
+function syncQuotesPeriodically() {
+    setInterval(fetchQuotesFromServer, 60000); // Sync every 60 seconds
+}
+
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 document.getElementById('exportQuotes').addEventListener('click', exportQuotesToJsonFile);
 document.getElementById('importFile').addEventListener('change', importFromJsonFile);
@@ -123,3 +159,4 @@ createAddQuoteForm();
 updateCategoryFilter();
 filterQuotes();
 showLastViewedQuote();
+syncQuotesPeriodically();
