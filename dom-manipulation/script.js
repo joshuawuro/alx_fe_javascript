@@ -79,7 +79,7 @@ function createAddQuoteForm() {
     submitButton.innerText = 'Add Quote';
     form.appendChild(submitButton);
 
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', async function (event) {
         event.preventDefault();
         const newQuote = {
             text: quoteInput.value,
@@ -89,10 +89,25 @@ function createAddQuoteForm() {
         saveQuotesToLocalStorage();
         updateCategoryFilter();
         filterQuotes();
+        await postQuoteToServer(newQuote);
         form.reset();
     });
 
     document.body.appendChild(form);
+}
+
+async function postQuoteToServer(quote) {
+    try {
+        await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(quote)
+        });
+    } catch (error) {
+        console.error('Error posting quote:', error);
+    }
 }
 
 function exportQuotesToJsonFile() {
