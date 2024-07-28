@@ -141,7 +141,7 @@ async function fetchQuotesFromServer() {
         saveQuotesToLocalStorage();
         updateCategoryFilter();
         filterQuotes();
-        showNotification('Quotes updated from server.');
+        showNotification('Quotes synced with server!');
     } catch (error) {
         console.error('Error fetching quotes:', error);
     }
